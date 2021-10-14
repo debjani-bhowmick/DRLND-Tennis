@@ -71,9 +71,11 @@ Then, place the file in the Tennis/ folder in the repository.
 #### *Step 5:* Train the model with the notebook:
 
  To train the agent run the script train_agent.py.
+ 
 `$ python train_agent.py --episodes 2000 --model checkpoint --plot Score.png`
 
 To test the agent:
+
 `python test_agent.py --actor_0_model checkpoint_actor_0.pth \
                        --critic_0_model checkpoint_critic_0.pth \
                        --actor_1_model checkpoint_actor_1.pth \

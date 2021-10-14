@@ -80,6 +80,8 @@ To test the agent:
                        --critic_0_model checkpoint_critic_0.pth \
                        --actor_1_model checkpoint_actor_1.pth \
                        --critic_1_model checkpoint_critic_1.pth`
+                       
+or follow the instructions from Play_Tennis.ipynb
 
 
 ## File Descriptions <a name="files"></a>

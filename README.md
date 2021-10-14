@@ -69,7 +69,15 @@ Then, place the file in the Tennis/ folder in the repository.
 
 
 #### *Step 5:* Train the model with the notebook:
- Activate the environmnet and play with Play_Tennis.ipynb to see the results 
+
+ To train the agent run the script train_agent.py.
+`$ python train_agent.py --episodes 2000 --model checkpoint --plot Score.png`
+
+To test the agent:
+`python test_agent.py --actor_0_model checkpoint_actor_0.pth \
+                       --critic_0_model checkpoint_critic_0.pth \
+                       --actor_1_model checkpoint_actor_1.pth \
+                       --critic_1_model checkpoint_critic_1.pth`
 
 
 ## File Descriptions <a name="files"></a>
@@ -80,6 +88,8 @@ The repo is structured as follows:
 * checkpoint_actor.pth: This is the binary containing the trained neural network weights for Actor.
 * checkpoint_critic.pth: This is the binary containing the trained neural network weights for Critic.
 * model.py: This module contains the implementation of the Actor and Critic neural networks.
+* Train_agent.py: This py file trains the agent.
+* Test_agent.py: This py file test the trained-agent.
 * Report.md: Project report and result analysis.
 * README.md: Readme file.
 * folder:checkpoints: Contains the models saved during training.

@@ -25,7 +25,7 @@ In this implementation we have decentralized the actor with centralized critic. 
 The main key points of the training has highlighted bellow:
 
 * We have used [Ornstein-Uhlenbeck process](https://arxiv.org/pdf/1509.02971.pdf), which by adding certain amount of noise to the action values at each timestep. This noise is correlated to previous noise and therefore tends to stay in the same direction for longer durations without canceling itself out. This allows the agent to maintain velocity and explore the action space with more continuity.
-* we have implemented gradient clipping using the torch.nn.utils.clip_grad_norm_ function.
+* we have implemented `gradient clipping` using the `torch.nn.utils.clip_grad_norm_ function`.
 * we have used `Experience replay`, whcih allows the RL agent to learn from past experience.
 
 

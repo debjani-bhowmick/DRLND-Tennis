@@ -17,11 +17,19 @@ The baseline model selects actions (uniformly) at random at each time step. The 
 
 Actor-critic methods leverage the strengths of both policy-based and value-based methods, which contains an actor and a critic network.
 
-Using a policy-based approach, the agent (actor) learns how to act by directly estimating the optimal policy and maximizing reward through gradient ascent. Meanwhile, employing a value-based approach, the agent (critic) learns how to estimate the value (i.e., the future cumulative reward) of different state-action pairs. Actor-critic methods combine these two approaches in order to accelerate the learning process. Actor-critic agents are also more stable than value-based agents, while requiring fewer training samples than policy-based agents.
 
-What makes this implementation unique is the decentralized actor with centralized critic approach from the paper by Lowe and Wu. Whereas traditional actor-critic methods have a separate critic for each agent, this approach utilizes a single critic that receives as input the actions and state observations from all agents. This extra information makes training easier and allows for centralized training with decentralized execution. Each agent still takes actions based on its own unique observations of the environment.
+A policy-based approach helps the agent (actor) to learns how to act by directly estimating the optimal policy and maximizing reward through gradient ascent whereas a value-based approach helps the 2nd agent (critic) to learns how to estimate the value (i.e., the future cumulative reward) of different state-action pairs. Actor-critic methods combine these two approaches in order to simplify the learning process. Actor-critic agents are also more stable than value-based agents, while requiring fewer training samples than policy-based agents.
 
-You can find the actor-critic logic implemented as part of the Agent() class here in maddpg_agent.py of the source code. The actor-critic models can be found via their respective Actor() and Critic() classes here in models.py.
+In this implementation we have decentralized the actor with centralized critic. The approach  was inspired from the paper by [Lowe and Wu](https://proceedings.neurips.cc/paper/2017/file/68a9750337a418a86fe06c1991a1d64c-Paper.pdf). Whereas traditional actor-critic methods have a separate critic for each agent, this approach utilizes a single critic that receives as input the actions and state observations from all agents. This extra information makes training easier and allows for centralized training with decentralized execution. Each agent still takes actions based on its own unique observations of the environment.
+
+The main key points of the training has highlighted bellow:
+
+* We have used [Ornstein-Uhlenbeck process](https://arxiv.org/pdf/1509.02971.pdf), which by adding certain amount of noise to the action values at each timestep. This noise is correlated to previous noise and therefore tends to stay in the same direction for longer durations without canceling itself out. This allows the agent to maintain velocity and explore the action space with more continuity.
+* we have implemented gradient clipping using the torch.nn.utils.clip_grad_norm_ function.
+* we have used `Experience replay`, whcih allows the RL agent to learn from past experience.
+
+
+
 
 
 

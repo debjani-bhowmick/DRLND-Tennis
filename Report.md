@@ -34,7 +34,7 @@ The main key points of the training has highlighted bellow:
 
 
 
-##### **state-action spaces**
+#### **state-action spaces**
 
 `Number of agents:` 20
 

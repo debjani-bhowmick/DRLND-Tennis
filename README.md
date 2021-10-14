@@ -11,38 +11,16 @@
 
 ##  Summary <a name="summary"></a>
 
-In this environment, a double-jointed arm can move to target locations. A reward of +0.1 is provided for each step that the agent's hand is in the goal location. Thus, the goal of your agent is to maintain its position at the target location for as many time steps as possible.
+In this project, you will work with the Tennis environment. In this environment, two agents control rackets to bounce a ball over a net. If an agent hits the ball over the net, it receives a reward of +0.1. If an agent lets a ball hit the ground or hits the ball out of bounds, it receives a reward of -0.01. Thus, the goal of each agent is to keep the ball in play.
 
-The observation space consists of 33 variables corresponding to position, rotation, velocity, and angular velocities of the arm. Each action is a vector with four numbers, corresponding to torque applicable to two joints. Every entry in the action vector should be a number between -1 and 1.
+The observation space consists of 8 variables corresponding to the position and velocity of the ball and racket. Each agent receives its own, local observation. Two continuous actions are available, corresponding to movement toward (or away from) the net, and jumping.
 
-#### Distributed Training
+The task is episodic, and in order to solve the environment, your agents must get an average score of +0.5 (over 100 consecutive episodes, after taking the maximum over both agents). Specifically,
 
-For this project, we have provided with two separate versions of the Unity environment:
+After each episode, we add up the rewards that each agent received (without discounting), to get a score for each agent. This yields 2 (potentially different) scores. We then take the maximum of these 2 scores.
+This yields a single score for each episode.
 
-* The first version contains a single agent.
-* The second version contains 20 identical agents, each with its own copy of the environment.
-
-
-## Environment <a name="Environment"></a>
-
-* *Set-up:* Double-jointed arm which can move to target locations.
-* *Goal:* Each agent must move its hand to the goal location, and keep it there.
-* *Agents:* The environment contains 20 agents linked to a single Brain.
-* *Agent Reward Function (independent):* +0.1 for each timestep agent's hand is in goal location.
-* *Brains:*  One Brain with the following observation/action space.
-
-Vector Observation space:* 33 variables corresponding to position, rotation, velocity, and angular velocities of the two arm Rigidbodies.  
-        
-Vector Action space:* (Continuous) Each action is a vector with four numbers, corresponding to torque applicable to two joints. Every entry in the action vector should be a number between -1 and 1. 
-           
-Visual Observations:* None.
-
-* Reset Parameters: Two, corresponding to goal size, and goal movement speed.
-
-#### Solving the Environment
-
-* Environment Solving Criteria: The target for the agent is to solve the environment by achieving a score of +30 averaged across all 20 agents for 100 consecutive episodes.
-
+`Environment Solving Criteria: The environment is considered solved, when the average (over 100 episodes) of those scores is at least +0.5`
 
 ## Getting Started <a name="Getting Started"></a>
 
@@ -50,7 +28,7 @@ Visual Observations:* None.
 `git clone https://github.com/debjani-bhowmick/DRLND-continous-learning.git` 
 
 #### *Step 2:*Change directory into the repo:
-`cd continuous-control`
+`cd Tennis`
 
 #### *Step 3:*  Activate the Environment
 
@@ -65,16 +43,18 @@ Further, the specific files to look into in the repository is python/setup.py an
 
 #### *Step 4:* Download the Unity Environment
 
-For this project, you will not need to install Unity - this is because environment has buit for you, and you can download it from one of the links below. You need only select the environment that matches your operating systM
+For this project, you will not need to install Unity - this is because environment has buit for you, and you can download it from one of the links below. You need only select the environment that matches your operating system
 
 Download the environment from one of the links below. You need only select the environment that matches your operating system:
 
-* Linux: (click here)[https://s3-us-west-1.amazonaws.com/udacity-drlnd/P2/Reacher/Reacher_Linux.zip]
-* Mac OSX: (click here)[https://s3-us-west-1.amazonaws.com/udacity-drlnd/P2/Reacher/Reacher.app.zip]
-* Windows (32-bit): (click here)[https://s3-us-west-1.amazonaws.com/udacity-drlnd/P2/Reacher/Reacher_Windows_x86.zip]
-* Windows (64-bit): (click here)[https://s3-us-west-1.amazonaws.com/udacity-drlnd/P2/Reacher/Reacher_Windows_x86_64.zip]
+* Linux: (click here)[https://s3-us-west-1.amazonaws.com/udacity-drlnd/P3/Tennis/Tennis_Linux.zip]
+* Mac OSX: (click here)[https://s3-us-west-1.amazonaws.com/udacity-drlnd/P3/Tennis/Tennis_Linux.zip]
+* Windows (32-bit): (click here)[https://s3-us-west-1.amazonaws.com/udacity-drlnd/P3/Tennis/Tennis_Windows_x86.zip]
+* Windows (64-bit): (click here)[https://s3-us-west-1.amazonaws.com/udacity-drlnd/P3/Tennis/Tennis_Windows_x86_64.zip]
 
 (For Windows users) Check out this link(https://support.microsoft.com/en-us/windows/32-bit-and-64-bit-windows-frequently-asked-questions-c6ca9541-8dce-4d48-0415-94a3faa2e13d) if you need help with determining if your computer is running a 32-bit version or 64-bit version of the Windows operating system.
+
+Then, place the file in the Tennis/ folder in the repository.
 
 #### *Step 5:*  Unzip (or decompress) the downloaded file:
 
@@ -85,17 +65,17 @@ Download the environment from one of the links below. You need only select the e
 * Windows (32-bit): [PowerShell]
 `Expand-Archive -Path Reacher_Windows_x86.zip -DestinationPath .
 *Windows (64-bit): [PowerShell]
-`Expand-Archive -Path Reacher_Windows_x86_64.zip -DestinationPath .`
+`Expand-Archive -Path Tennis_Windows_x86_64.zip -DestinationPath .`
 
 
 #### *Step 5:* Train the model with the notebook:
- Activate the environmnet and play with Continuous_Control.ipynb to see the results 
+ Activate the environmnet and play with Play_Tennis.ipynb to see the results 
 
 
 ## File Descriptions <a name="files"></a>
 The repo is structured as follows:
 
-* Continuous_Control.ipynb: This is where the DDPG agent is trained.
+* Play_Tennis.ipynb: This is where the DDPG agent is trained.
 * ddpg_agent.py: This module implements a class to represent a DDPG agent.
 * checkpoint_actor.pth: This is the binary containing the trained neural network weights for Actor.
 * checkpoint_critic.pth: This is the binary containing the trained neural network weights for Critic.
@@ -109,11 +89,13 @@ The repo is structured as follows:
 
 ## Experiments <a name="experiments"></a>
 
-Follow the instructions in Continuous_Control.ipynb to get started with training your own agent!
+Follow the instructions in Play_Tennis.ipynb to get started with training your own agent!
 
 Trained model weights is included for quickly running the agent and seeing the result in Unity ML Agent.
 
-Run the last cell of the notebook Continuous_Control.ipynb.
+Run the last cell of the notebook Play_Tennis.ipynb.
+
+
 
 
 

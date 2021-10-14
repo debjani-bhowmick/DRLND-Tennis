@@ -58,14 +58,17 @@ There are 20 agents. Each observes a state with length: 33
 | Parameter | Description | Value |
 | --- | --- | --- |
 | `GAMMA` | Discount factor | 0.99 |
-| `TAU` | Soft update of target parameters| 1e-3 |
+| `TAU` | Soft update of target parameters| 6e-2 |
 | `LR_ACTOR` | Learning rate for the actor | 1e-3 |
-| `LR_CRITIC` | Learning rate for the critic | 1e-0 |
+| `LR_CRITIC` | Learning rate for the critic | 1e-3 |
 | `WEIGHT_DECAY` | L2 Weight decay | 0.0000 |
 | `BATCH_SIZE` | Minibatch size | 128|
 | `BUFFER_SIZE` | Size for memory buffer | int(1e6)|
-| `LEARN_EVERY` | Learning timestep interval | 20 |       
-| `LEARN_NUM` | Number of learning passes | 0.99 |
+| `LEARN_EVERY` | Learning timestep interval | 1 |       
+| `LEARN_NUM` | Number of learning passes | 1 |
+| `eps_start` | Noise level start |  6  |  
+| `eps_end` | Noise level end | 0 |
+| `eps_decay` | Number of episodes to decay over from start to  | 250  | 
 
 
 
@@ -86,7 +89,7 @@ Following is the Neural Network architecture:
 
 ## Result
 
-The agent was able to solve the 20 agent Reacher environment. The goal for the performance measure is an average reward of at least +30 over 100 episodes, and over all 20 agents.
+The agents were trained until an average score of +0.5 was achieved.The best-performing agents were able to solve the environment in 607 episodes, with a top score of 5.2 and a top moving average of 0.927. 
 
 
 

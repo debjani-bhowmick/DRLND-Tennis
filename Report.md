@@ -4,7 +4,7 @@
 
 Due to the complexitity and requirment of the environmnet (Mutiagent and continous space), I choose a policy-based method, rather than a value based method. 
 
-The algorithm implemented to solve this environment is `Multi-Agent Deep Deterministic Policy Gradient (MADDPG)`, which has outlined by researchers at Google Deepmind in this (paper)[https://arxiv.org/pdf/1509.02971.pdf]. In this paper, the authors present `"a model-free, off-policy actor-critic algorithm using deep function approximators that can learn policies in high-dimensional, continuous action spaces."` They highlight that DDPG can be viewed as an extension of Deep Q-learning to continuous tasks.
+The algorithm implemented to solve this environment is `Multi-Agent Deep Deterministic Policy Gradient (MADDPG)`, which has outlined by researchers at Google Deepmind in this [paper](https://arxiv.org/pdf/1509.02971.pdf). In this paper, the authors present `"a model-free, off-policy actor-critic algorithm using deep function approximators that can learn policies in high-dimensional, continuous action spaces."` They highlight that DDPG can be viewed as an extension of Deep Q-learning to continuous tasks.
 
 ## The Model
 

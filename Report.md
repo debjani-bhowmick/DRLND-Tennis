@@ -6,40 +6,24 @@ Due to the complexitity and requirment of the environmnet (Mutiagent and contino
 
 The algorithm implemented to solve this environment is `Multi-Agent Deep Deterministic Policy Gradient (MADDPG)`, which has outlined by researchers at Google Deepmind in this [paper](https://arxiv.org/pdf/1509.02971.pdf). In this paper, the authors present `"a model-free, off-policy actor-critic algorithm using deep function approximators that can learn policies in high-dimensional, continuous action spaces."` They highlight that DDPG can be viewed as an extension of Deep Q-learning to continuous tasks.
 
+## Establish Baseline
+
+The baseline model selects actions (uniformly) at random at each time step. The resulted score for baseline model is 0.02, which is ofcourse not following the criteria set by Udacity to solve the agent, also if we watch the agent, we can say the model has not converged yet, however, these type of random action could be useful in the early stage of training process as it helps to explore the action space. This insight will come into play later when we implement the Ornstein-Uhlenbeck process and epsilon noise decay.
+
+
 ## The Model
 
-It primarily uses two neural networks, one for the actor and one for the critic. The critic is a Q-value network that takes in state and action as input and outputs the Q-value. 
- 
- ![](images/NeuralNetwork.png)
+#### Actor-Critic Method
+
+Actor-critic methods leverage the strengths of both policy-based and value-based methods, which contains an actor and a critic network.
+
+Using a policy-based approach, the agent (actor) learns how to act by directly estimating the optimal policy and maximizing reward through gradient ascent. Meanwhile, employing a value-based approach, the agent (critic) learns how to estimate the value (i.e., the future cumulative reward) of different state-action pairs. Actor-critic methods combine these two approaches in order to accelerate the learning process. Actor-critic agents are also more stable than value-based agents, while requiring fewer training samples than policy-based agents.
+
+What makes this implementation unique is the decentralized actor with centralized critic approach from the paper by Lowe and Wu. Whereas traditional actor-critic methods have a separate critic for each agent, this approach utilizes a single critic that receives as input the actions and state observations from all agents. This extra information makes training easier and allows for centralized training with decentralized execution. Each agent still takes actions based on its own unique observations of the environment.
+
+You can find the actor-critic logic implemented as part of the Agent() class here in maddpg_agent.py of the source code. The actor-critic models can be found via their respective Actor() and Critic() classes here in models.py.
 
 
-* The Critic-Network consists of two hiddenlayer with Sigmoid activation.
-
-* The Actor-Network consists of two hiddenlayers with relu activation. For the Output-layer a tanh-function is used in order to map the 	output the servo angles.
-
-The following pseudocode shows the DDPG Algorithm by (Lillicrap et al., 2015).
-
- ![](images/pseudocode)
- 
-The critic is trained by minimizing the bellman equation. But in contrast to Deep-Q-Learning it only outpus one Q-value per state-action pair. The actor on the other hand can be trained by directly applying the gradient.
-
-`Enviornment`, `actions`, `state` and `reward` need to be defined:
-
-##### The Environment
-
-**Set-up:** Double-jointed arm which can move to target locations.
-**Goal:** Each agent must move its hand to the goal location, and keep it there.
-**Agents:** The environment contains 20 agents linked to a single Brain.
-Agent Reward Function (independent):
-+0.1 for each timestep agent's hand is in goal location.
-**Brains:** One Brain with the following observation/action space.
-* Vector Observation space: 33 variables corresponding to position, rotation, velocity, and angular velocities of the two arm Rigidbodies.
-* Vector Action space: (Continuous) Each action is a vector with four numbers, corresponding to torque applicable to two joints. Every entry in the action vector should be a number between -1 and 1.
-* Visual Observations: None.
-
-**Reset Parameters:** Two, corresponding to goal size, and goal movement speed.
-**Environment Solving Criteria:** The target for the agent is to solve the environment by achieving a score of +30 averaged across all 20 agents for 100 consecutive episodes.
-The most straigh forward approach is to define the actions by a twelve dimensional vector.
 
 
 ##### **state-action spaces**
@@ -101,17 +85,12 @@ The agent was able to solve the 20 agent Reacher environment. The goal for the p
 
 ## Future Improvement
 
-**Prioritized Experience Replay:** as per DeepMind,` Prioritized Experience Replay` technique helps reduce the training time, improve the stability of the training process and is less prone to the change in hyperparameters.This could be tried in future.
-
-**Experiment with other algorithms:** Trying different hyperparametrs of the DDPG algorithm required a lot of trial and error and so more time is needed. For example
-
-* Increase number of training episodes
-* Increase depth of each network, etc could be tried to see the model performance.
-
-More robust algorithms like Trust Region Policy Optimization (TRPO), [Proximal Policy Optimization (PPO)](Proximal Policy Optimization Algorithms), or Distributed Distributional Deterministic Policy Gradients (D4PG) could be tried in future.
+* A grid-search can be used to choose hyperparameter and investigate their influence on the solution.
+* Implement Prioritized Experience Replay from the DQN paper to further reduce training time.
+* Test other weight initialization methods, to see if training time can be systematically reduced.
 
 ## References:
-(Mnih et al., 2013), Playing Atari with Deep Reinforcement Learning
+(Lowe et al., 2013), Multi-Agent Actor-Critic for Mixed Cooperative-Competitive Environments
 
 (Silver et al. 2014), Deterministic Policy Gradient
 

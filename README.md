@@ -25,7 +25,7 @@ This yields a single score for each episode.
 #### *Step 1:* Clone the repo:
 `git clone https://github.com/debjani-bhowmick/DRLND-continous-learning.git` 
 
-#### *Step 2:*Change directory into the repo:
+#### *Step 2:* Change directory into the repo:
 `cd Tennis`
 
 #### *Step 3:*  Activate the Environment
@@ -66,7 +66,7 @@ Then, place the file in the Tennis/ folder in the repository.
 `Expand-Archive -Path Tennis_Windows_x86_64.zip -DestinationPath .`
 
 
-#### *Step 5:* Train the model with the notebook:
+#### *Step 6:* Train the model with the notebook:
 
 Follow the instructions from Tennis.ipynb
 

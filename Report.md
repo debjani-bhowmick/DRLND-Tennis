@@ -9,7 +9,7 @@ The algorithm implemented to solve this environment is `Multi-Agent Deep Determi
 
 The baseline model selects actions (uniformly) at random at each time step. The maximum resulted score for baseline model is 0.09, which is ofcourse not following the criteria set by Udacity to solve the agent, also if we watch the agent, we can say the model has not converged yet, however, these type of random action could be useful in the early stage of training process as it helps to explore the action space. This insight will come into play later when we implement the Ornstein-Uhlenbeck process and epsilon noise decay.
 
- ![image info](./Images/random_walk.png)
+ ![Baseline](./Images/random_walk.png)
 
 
 ## The Model

@@ -33,7 +33,6 @@ The main key points of the training has highlighted bellow:
 
 
 
-
 #### **state-action spaces**
   
  `Number of agents:`  2
@@ -92,7 +91,7 @@ Following is the Neural Network architecture:
 The agents were trained until an average score of +0.5 was achieved.The best-performing agents were able to solve the environment in 618 episodes, with moving average 0.500 over past 100 episodes. I have run the network for 3500 epochs, best episode was 1378 where `Max Reward: 5.300` and 	`Moving Average: 2.164`
 Bellow is the 
 
- ![image info](/Images/solved_system.PNG)
+ ![image info](./Images/solved_system.PNG)
 
 
 ## Future Improvement

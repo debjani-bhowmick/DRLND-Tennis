@@ -9,7 +9,7 @@ The algorithm implemented to solve this environment is `Multi-Agent Deep Determi
 
 The baseline model selects actions (uniformly) at random at each time step. The maximum resulted score for baseline model is 0.09, which is ofcourse not following the criteria set by Udacity to solve the agent, also if we watch the agent, we can say the model has not converged yet, however, these type of random action could be useful in the early stage of training process as it helps to explore the action space. This insight will come into play later when we implement the Ornstein-Uhlenbeck process and epsilon noise decay.
 
- ![Baseline](./Images/random_walk.png)
+ ![Baseline](./Images/random_walk.PNG)
 
 
 ## The Model
@@ -78,11 +78,11 @@ The output of the Actor is concatenated to the Critic's first layer output to be
 Following is the Neural Network architecture:
  ##### The actor network
  
- ![image info](/Images/actor_arc.png)
+ ![Actor](/Images/actor.PNG)
  
  ##### The critic network
  
- ![image info](/Images/critic_arc.png)
+ ![image info](/Images/Critic.PNG)
 
 
 ## Result
@@ -90,7 +90,7 @@ Following is the Neural Network architecture:
 The agents were trained until an average score of +0.5 was achieved.The best-performing agents were able to solve the environment in 618 episodes, with moving average 0.500 over past 100 episodes. I have run the network for 3500 epochs, best episode was 1378 where `Max Reward: 5.300` and 	`Moving Average: 2.164`
 Bellow is the 
 
- ![image info](/Images/solved_system.png)
+ ![image info](/Images/solved_system.PNG)
 
 
 ## Future Improvement

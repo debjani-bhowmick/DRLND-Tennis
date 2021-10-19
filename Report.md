@@ -7,7 +7,9 @@ Due to the complexitity and requirment of the environmnet (Mutiagent and contino
 The algorithm implemented to solve this environment is `Multi-Agent Deep Deterministic Policy Gradient (MADDPG)`, which has outlined by researchers at Google Deepmind in this [paper](https://arxiv.org/pdf/1509.02971.pdf). In this paper, the authors present `"a model-free, off-policy actor-critic algorithm using deep function approximators that can learn policies in high-dimensional, continuous action spaces."`
 ## Establish Baseline
 
-The baseline model selects actions (uniformly) at random at each time step. The resulted score for baseline model is 0.02, which is ofcourse not following the criteria set by Udacity to solve the agent, also if we watch the agent, we can say the model has not converged yet, however, these type of random action could be useful in the early stage of training process as it helps to explore the action space. This insight will come into play later when we implement the Ornstein-Uhlenbeck process and epsilon noise decay.
+The baseline model selects actions (uniformly) at random at each time step. The maximum resulted score for baseline model is 0.09, which is ofcourse not following the criteria set by Udacity to solve the agent, also if we watch the agent, we can say the model has not converged yet, however, these type of random action could be useful in the early stage of training process as it helps to explore the action space. This insight will come into play later when we implement the Ornstein-Uhlenbeck process and epsilon noise decay.
+
+ ![](Images/random_walk.png)
 
 
 ## The Model
@@ -34,40 +36,37 @@ The main key points of the training has highlighted bellow:
 
 
 #### **state-action spaces**
+  
+ `Number of agents:`  2
 
-`Number of agents:` 20
+`Size of each action:` 2
 
-`Size of each action:` 4
+There are 2 agents. Each observes a state with length: 24
 
-There are 20 agents. Each observes a state with length: 33
-
-`The state for the first agent looks like:` [  0.00000000e+00  -4.00000000e+00   0.00000000e+00   1.00000000e+00
-  -0.00000000e+00  -0.00000000e+00  -4.37113883e-08   0.00000000e+00
-   0.00000000e+00   0.00000000e+00   0.00000000e+00   0.00000000e+00
-   0.00000000e+00   0.00000000e+00  -1.00000000e+01   0.00000000e+00
-   1.00000000e+00  -0.00000000e+00  -0.00000000e+00  -4.37113883e-08
-   0.00000000e+00   0.00000000e+00   0.00000000e+00   0.00000000e+00
-   0.00000000e+00   0.00000000e+00   5.75471878e+00  -1.00000000e+00
-   5.55726624e+00   0.00000000e+00   1.00000000e+00   0.00000000e+00
-  -1.68164849e-01]
+`The state for the first agent looks like`: [ 0.          0.          0.          0.          0.          0.          0.
+  0.          0.          0.          0.          0.          0.          0.
+  0.          0.         -6.65278625 -1.5        -0.          0.
+  6.83172083  6.         -0.          0.        ]
 
 
 #### **Hyperparameters**
 
 | Parameter | Description | Value |
 | --- | --- | --- |
-| `GAMMA` | Discount factor | 0.99 |
-| `TAU` | Soft update of target parameters| 6e-2 |
-| `LR_ACTOR` | Learning rate for the actor | 1e-3 |
-| `LR_CRITIC` | Learning rate for the critic | 1e-3 |
-| `WEIGHT_DECAY` | L2 Weight decay | 0.0000 |
-| `BATCH_SIZE` | Minibatch size | 128|
-| `BUFFER_SIZE` | Size for memory buffer | int(1e6)|
-| `LEARN_EVERY` | Learning timestep interval | 1 |       
-| `LEARN_NUM` | Number of learning passes | 1 |
-| `eps_start` | Noise level start |  6  |  
-| `eps_end` | Noise level end | 0 |
-| `eps_decay` | Number of episodes to decay over from start to  | 250  | 
+| `gamma` | Discount factor | 0.99 |
+| `tau` | Soft update of target parameters| 7e-2 |
+| `lr_actor` | Learning rate for the actor | 1e-3 |
+| `lr_critic` | Learning rate for the critic | 1e-3  |
+| `weight_deacy` | L2 Weight decay | 0.0000 |
+| `epoch decay` | episode to end the noise decay process | 250 |
+| `batch_size` | Minibatch size | 128|
+| `buffer_size` | Size for memory buffer | int(1e6)|
+| `learn_every` | Learning timestep interval | 1 |       
+| `learn_num` | Number of learning passes | 1 |
+| `end_epoch` | final value for epsilon after decay | 0 |
+| `start_epoch`| initial value for epsilon in noise decay process in Agent.act() | 5.0 |
+| `ou_sigma` | Ornstein-Uhlenbeck noise parameter, volatility | 0.2 |
+| `ou_theta` | Ornstein-Uhlenbeck noise parameter, speed of mean reversion | 0.13 |
 
 
 
@@ -80,17 +79,21 @@ For both the Actor and Critic, the size of the input linear layer is the state s
 The output of the Actor is concatenated to the Critic's first layer output to be connected to the first hidden layer's input.
 
 Following is the Neural Network architecture:
-
-
-
-
+ ##### The actor network
+ 
+ ![](I/actor_arc.png)
+ 
+ ##### The critic network
+ 
+ ![](Images/critic_arc.png)
 
 
 ## Result
 
-The agents were trained until an average score of +0.5 was achieved.The best-performing agents were able to solve the environment in 607 episodes, with a top score of 5.2 and a top moving average of 0.927. 
+The agents were trained until an average score of +0.5 was achieved.The best-performing agents were able to solve the environment in 618 episodes, with moving average 0.500 over past 100 episodes. I have run the network for 3500 epochs, best episode was 1378 where `Max Reward: 5.300` and 	`Moving Average: 2.164`
+Bellow is the 
 
-
+ ![](Images/solved_system.png)
 
 
 ## Future Improvement
@@ -98,6 +101,7 @@ The agents were trained until an average score of +0.5 was achieved.The best-per
 * A grid-search can be used to choose hyperparameter and investigate their influence on the solution.
 * Implement Prioritized Experience Replay from the DQN paper to further reduce training time.
 * Test other weight initialization methods, to see if training time can be systematically reduced.
+* 
 
 ## References:
 (Lowe et al., 2013), Multi-Agent Actor-Critic for Mixed Cooperative-Competitive Environments

@@ -3,11 +3,9 @@
 ## Table of Contents
 
 1. [Summary](#summary)
-2. [Environment](#Environment)
-3. [Installation](#installation) 
-4. [Getting Started](#GettingStarted)
-5. [File Descriptions](#files)
-6. [Experiments](#experiments)
+2. [Getting Started](#GettingStarted) 
+3. [File Descriptions](#files)
+4. [Experiments](#experiments)
 
 ##  Summary <a name="summary"></a>
 

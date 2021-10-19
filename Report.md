@@ -77,11 +77,11 @@ For both the Actor and Critic, the size of the input linear layer is the state s
 The output of the Actor is concatenated to the Critic's first layer output to be connected to the first hidden layer's input.
 
 Following is the Neural Network architecture:
- ##### The actor network
+ ## The actor network
  
  ![Actor](./Images/actor.PNG)
  
- ##### The critic network
+ ## The critic network
  
  ![Critic](./Images/Critic.PNG)
 

@@ -70,44 +70,31 @@ Then, place the file in the Tennis/ folder in the repository.
 
 #### *Step 5:* Train the model with the notebook:
 
- To train the agent run the script train_agent.py.
- 
-`$ python train_agent.py --episodes 2000 --model checkpoint --plot Score.png`
-
-To test the agent:
-
-`python test_agent.py --actor_0_model checkpoint_actor_0.pth \
-                       --critic_0_model checkpoint_critic_0.pth \
-                       --actor_1_model checkpoint_actor_1.pth \
-                       --critic_1_model checkpoint_critic_1.pth`
-                       
-or follow the instructions from Play_Tennis.ipynb
+Follow the instructions from Tennis.ipynb
 
 
 ## File Descriptions <a name="files"></a>
 The repo is structured as follows:
 
-* Play_Tennis.ipynb: This is where the DDPG agent is trained.
-* ddpg_agent.py: This module implements a class to represent a DDPG agent.
-* checkpoint_actor.pth: This is the binary containing the trained neural network weights for Actor.
-* checkpoint_critic.pth: This is the binary containing the trained neural network weights for Critic.
+* Tennis.ipynb: This is where the MADDPG agent is trained.
+* maddpg_agent.py: This module implements MADDPG algorithm.
+* models/checkpoint_actor_0.pth: This is the binary containing the trained neural network weights for 1st Actor.
+* models/checkpoint_critic_0.pth: This is the binary containing the trained neural network weights for 1st Critic.
+* models/checkpoint_actor_1.pth: This is the binary containing the trained neural network weights for 2nd Actor .
+* models/checkpoint_critic_1.pth: This is the binary containing the trained neural network weights for 2nd Critic.
 * model.py: This module contains the implementation of the Actor and Critic neural networks.
-* Train_agent.py: This py file trains the agent.
-* Test_agent.py: This py file test the trained-agent.
 * Report.md: Project report and result analysis.
 * README.md: Readme file.
-* folder:checkpoints: Contains the models saved during training.
+* folder:models: Contains the models saved during training.
 * folder:python: This folder has been directly copied from the original repository of Udacity Deep Reinforcement Learning Nanodegree, and contains the files related to                 installation and set up of the environment.
 * folder:Images: Contains screenshots of the results as well as additional images used for this document.
 
 
 ## Experiments <a name="experiments"></a>
 
-Follow the instructions in Play_Tennis.ipynb to get started with training your own agent!
+Follow the instructions in Tennis.ipynb to get started with training your own agent!
 
 Trained model weights is included for quickly running the agent and seeing the result in Unity ML Agent.
-
-Run the last cell of the notebook Play_Tennis.ipynb.
 
 
 
